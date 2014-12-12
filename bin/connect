@@ -297,6 +297,14 @@ class shexttype(commandtype):
 		sys.exit(rc)
 		#os.execv('/bin/sh', [self.name, self.data] + list(args))
 
+	def usage(self, *args, **kwargs):
+		# self.data contains path
+		fp = open(self.data, 'r')
+		for line in fp:
+			if '@usage' in line:
+				yield line[line.find('@usage')+6:].strip()
+
+
 class Main(object):
 	def __init__(self):
 		self.arg0 = os.path.basename(sys.argv[0])

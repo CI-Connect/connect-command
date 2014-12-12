@@ -240,7 +240,7 @@ class pyexttype(commandtype):
 			try:
 				setattr(self.mod, name, __import__(name))
 			except ImportError, e:
-				pass
+				setattr(self.mod, name, None)
 
 		for name in PluginModulesAll:
 			try:
@@ -249,7 +249,7 @@ class pyexttype(commandtype):
 				for name in tmp.__dict__:
 					setattr(self.mod, name, getattr(tmp, name))
 			except:
-				pass
+				setattr(self.mod, name, None)
 
 		if hasattr(self.mod, 'setup'):
 			self.mod.setup()
